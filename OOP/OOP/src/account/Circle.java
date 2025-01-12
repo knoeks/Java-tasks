@@ -1,3 +1,5 @@
+package account;
+
 public class Circle {
 
     private double radius = 1.0;
@@ -43,7 +45,7 @@ public class Circle {
     // toString:
     @Override
     public String toString() {
-        return "Circle[radius = " + radius + " color = " + color + "]";
+        return "account.Circle[radius = " + radius + " color = " + color + "]";
     }
 }
 
