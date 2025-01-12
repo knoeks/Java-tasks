@@ -3,8 +3,6 @@ import java.util.Comparator;
 
 public class Suitcase {
   private ArrayList<Item> items;
-  private int count = 0;
-  private int weight = 0;
   private int capacity;
 
   public Suitcase(int capacity) {
@@ -13,27 +11,25 @@ public class Suitcase {
   }
 
   public void addItem(Item item) {
-    if (weight + item.getWeight() > capacity) {
+    if (totalWeight() + item.getWeight() > capacity) {
       return;
     }
-    count++;
-    weight += item.getWeight();
     items.add(item);
   }
 
   public String toString() {
-    switch (count) {
+    switch (items.size()) {
       case 0:
-        return count + " no items";
+        return "no items (0 kg)";
       case 1:
-        return count + " item (" + weight + " kg)";
+        return items.size() + " item (" + totalWeight() + " kg)";
       default:
-        return count + " items (" + weight + " kg)";
+        return items.size() + " items (" + totalWeight() + " kg)";
     }
   }
 
   public int totalWeight() {
-    return weight;
+    return items.stream().mapToInt(Item::getWeight).sum();
   }
 
   public void printItems() {

@@ -2,8 +2,6 @@ import java.util.ArrayList;
 import java.util.stream.Stream;
 
 public class Hold {
-  private int count = 0;
-  private int weight = 0;
   private int capacity;
   private ArrayList<Suitcase> suitcases;
 
@@ -13,22 +11,24 @@ public class Hold {
   }
 
   public void addSuitcase(Suitcase suitcase) {
-    if (weight + suitcase.totalWeight() > capacity) {
+    if (totalWeight() + suitcase.totalWeight() > capacity) {
       return;
     }
     suitcases.add(suitcase);
-    weight += suitcase.totalWeight();
-    count++;
+  }
+
+  public int totalWeight() {
+    return suitcases.stream().mapToInt(Suitcase::totalWeight).sum();
   }
 
   public String toString() {
-    switch (count) {
+    switch (suitcases.size()) {
       case 0:
-        return count + " no suitcases";
+        return suitcases.size() + " no suitcases";
       case 1:
-        return count + " suitcase (" + weight + " kg)";
+        return suitcases.size() + " suitcase (" + totalWeight() + " kg)";
       default:
-        return count + " suitcases (" + weight + " kg)";
+        return suitcases.size() + " suitcases (" + totalWeight() + " kg)";
     }
   }
 
