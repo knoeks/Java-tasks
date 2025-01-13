@@ -1,12 +1,14 @@
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Menu {
 
-    private ArrayList<String> meals;
+    private Set<String> meals;
 
     public Menu() {
-        this.meals = new ArrayList<>();
+        this.meals = new HashSet<>();
     }
 
     // implement the required methods here

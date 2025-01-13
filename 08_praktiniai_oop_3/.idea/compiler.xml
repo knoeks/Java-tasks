@@ -15,9 +15,9 @@
         <module name="08_3_02.IdenticalTwins" />
         <module name="08_3_01.Song" />
         <module name="08_3_03.Books" />
-        <module name="08_3_12.CargoHold" />
-        <module name="08_3_11.HeightOrder" />
         <module name="08_3_07.MessagingService" />
+        <module name="08_3_11.HeightOrder" />
+        <module name="08_3_12.CargoHold" />
       </profile>
     </annotationProcessing>
   </component>
