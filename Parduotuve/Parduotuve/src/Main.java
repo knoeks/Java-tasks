@@ -1,16 +1,16 @@
 public class Main {
   public static void main(String[] args){
 
-    Regular regular1 = new Regular();
-    Regular regular2 = new Regular();
-
-    System.out.println(regular1.toString());
-    System.out.println(regular2.toString());
-    System.out.println(regular1.toString());
-
-    System.out.println(regular1.getBruto());
-    System.out.println(regular2.getBruto());
-    System.out.println(regular1.getBruto());
+//    BaseProduct baseProduct1 = new BaseProduct("butter");
+//    BaseProduct baseProduct2 = new BaseProduct("oil");
+//
+//    System.out.println(baseProduct1.toString());
+//    System.out.println(baseProduct2.toString());
+//    System.out.println(baseProduct1.toString());
+//
+//    System.out.println(baseProduct1.getBruto());
+//    System.out.println(baseProduct2.getBruto());
+//    System.out.println(baseProduct1.getBruto());
 
 
   }

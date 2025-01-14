@@ -16,4 +16,16 @@ public class ParseDecimal {
       }
     }
   }
+
+  public static BigDecimal getVolume() {
+    while (true) {
+      try {
+        System.out.println("Enter a valid decimal number: ");
+        BigDecimal a = new BigDecimal(reader.nextLine());
+        return a.setScale(2, RoundingMode.UP);
+      } catch (NumberFormatException e) {
+        System.out.println("\nInvalid input. Please enter a valid decimal number");
+      }
+    }
+  }
 }
