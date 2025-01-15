@@ -13,5 +13,12 @@ public class Program {
 //        System.out.println(dictionary.translate("lie"));
 //        dictionary.remove("bow");
 //        System.out.println(dictionary.translate("bow"));
+        DictionaryOfManyTranslations d = new DictionaryOfManyTranslations();
+        d.add("monkey","apina");
+        d.add("monkey","apfe");
+        d.add("cheese","juusto");
+        d.remove("monkey");
+        d.add("milk","maito");
+        d.translate("monkey");
     }
 }
