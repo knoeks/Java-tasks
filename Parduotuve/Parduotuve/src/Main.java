@@ -10,7 +10,7 @@ public class Main {
 //
 //    System.out.println(baseProduct1.getBruto());
 //    System.out.println(baseProduct2.getBruto());
-//    System.out.println(baseProduct1.getBruto());
+    Alcohol alcohol = new Alcohol();
 
 
   }

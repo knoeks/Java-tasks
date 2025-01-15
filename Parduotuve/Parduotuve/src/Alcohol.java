@@ -1,5 +1,12 @@
 import java.math.BigDecimal;
 
 public class Alcohol {
-  BigDecimal alcoholVolume = new BigDecimal()
+  private BigDecimal alcoholVolume;
+
+  public Alcohol() {
+    this.alcoholVolume = ParseDecimal.getVolume();
+    System.out.println(alcoholVolume);
+  }
+
+
 }

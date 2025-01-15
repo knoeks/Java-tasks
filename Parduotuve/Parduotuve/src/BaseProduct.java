@@ -13,7 +13,7 @@ public abstract class BaseProduct implements Product {
   }
 
   public void setBasePrice() {
-    this.neto = ParseDecimal.getInput();
+    this.neto = ParseDecimal.getPrice();
     bruto = BrutoCalculator.calculate(neto, tax);
   }
 
