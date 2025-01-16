@@ -17,9 +17,6 @@ public class ReadingFilesPerLine {
     // test the method here
     List<String> lines = read("text.txt");
     lines.stream().forEach(System.out::println);
-
-    String data = "kekkonen\nwith two rows\n";
-    File newFile = create(data);
   }
 
   public static List<String> read(String file) {

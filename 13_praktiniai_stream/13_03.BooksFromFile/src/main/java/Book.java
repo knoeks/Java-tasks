@@ -29,4 +29,13 @@ public class Book {
         return pageCount;
     }
 
+    @Override
+    public String toString() {
+        return "Book{" +
+                "name='" + name + '\'' +
+                ", publishingYear=" + publishingYear +
+                ", pageCount=" + pageCount +
+                ", author='" + author + '\'' +
+                '}';
+    }
 }
