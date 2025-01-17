@@ -23,6 +23,8 @@ public class ParseDecimal {
     while (true) {
 //      try {
       System.out.println("Enter a valid decimal number: ");
+
+      // neveikiantis metodas, procentus reikia tikrinti su 
       DecimalFormat decimalFormat = new DecimalFormat("00.00");
       System.out.println(decimalFormat.format(new BigDecimal(reader.nextLine())));
 

@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 public class BooksFromFile {
 
@@ -23,17 +24,19 @@ public class BooksFromFile {
   }
 
   public static List<Book> readBooks(String file) {
-    List<Book> books = new ArrayList<>();
+    List<Book> books;
     try {
-      File file1 = new File(file);
-      Scanner reader = new Scanner(file1);
-      while (reader.hasNextLine()) {
-        List<String> book = Arrays.stream(reader.nextLine().split(",")).toList();
-        books.add(new Book(book.get(0), Integer.parseInt(book.get(1)), Integer.parseInt(book.get(2)), book.get(3)));
-      }
-
-    } catch (FileNotFoundException e) {
-      System.out.println("File not found");
+      books = Files.lines(Paths.get(file)).sorted().map(item -> {
+        String[] parts = item.split(",");
+        return new Book(
+                parts[0].trim(),
+                Integer.parseInt(parts[1]),
+                Integer.parseInt(parts[2]),
+                parts[3].trim()
+        );
+      }).toList();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
     return books;
   }
