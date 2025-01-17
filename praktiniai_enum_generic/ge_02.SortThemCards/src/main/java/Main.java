@@ -14,7 +14,7 @@ public class Main {
         hand.add(new Card(7, Suit.HEART));
         hand.add(new Card(2, Suit.SPADE));
 
-        hand. sortBySuit();
+        hand.sortBySuit();
 
         hand.print();
     }
