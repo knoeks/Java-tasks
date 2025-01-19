@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class ValidString {
+public class ValidString implements Validatable<String>{
   private String text;
   String nameRegex = "[!#$%&*+,.\\/:;<=>?@\\\\^`{|}~\\x00-\\x20]";
   String descriptionRegex = "[#$%&*+/<=>?@\\\\^`{|}~\\x00-\\x20]";
@@ -28,6 +28,11 @@ public class ValidString {
       System.out.print("Invalid description length. ");
       throw new NumberFormatException();
     }
+    return text;
+  }
+
+  @Override
+  public String validate() {
     return text;
   }
 }

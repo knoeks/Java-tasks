@@ -3,18 +3,16 @@ import java.util.ArrayList;
 
 public class BaseAlcohol extends BaseProduct {
   private final BigDecimal alcoholVolume;
-  private Integer breakPoints;
-  private ArrayList<BigDecimal> volumeBreakPoints;
-  private ArrayList<BigDecimal> excises;
 
   // excises = volumeBreakPoint + 1;
 
-  public BaseAlcohol(String name) {
-    super(name);
-    this.alcoholVolume = ParseInput.getValidatedInput("Input a valid alcohol percentage: ", ValidNumber::ValidateAlcoholVolume);
-    this.breakPoints = 
-    System.out.println(alcoholVolume);
+  public BaseAlcohol(BigDecimal tax) {
+    super(tax);
+    this.alcoholVolume = ParseInput.getValidatedNumber("Input a valid alcohol percentage: ", ValidNumber::ValidateAlcoholVolume);
+    ParseInput.getValidatedNumber("Enter price before tax: ", ValidNumber::ValidatePositiveDecimal);
   }
 
-
+  public BigDecimal getAlcoholVolume() {
+    return alcoholVolume;
+  }
 }

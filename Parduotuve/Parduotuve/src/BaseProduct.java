@@ -5,15 +5,15 @@ public abstract class BaseProduct {
   private BigDecimal neto;
   private BigDecimal tax = new BigDecimal(21);
 
-  public BaseProduct(String name) {
-    this.name = name;
-    this.neto = ParseInput.getValidatedInput("Enter price before tax: ", ValidNumber::ValidatePositiveDecimal);
+  public BaseProduct(BigDecimal tax) {
+    this.name = ParseInput.getValidatedString("Product name: ", ValidString::ValidateName);
+    this.neto = ParseInput.getValidatedNumber("Enter price before tax: ", ValidNumber::ValidatePositiveDecimal);
     this.tax = tax;
   }
 
  // setters
   public void setNeto() {
-    this.neto = ParseInput.getValidatedInput("Change price before tax: ", ValidNumber::ValidatePositiveDecimal);
+    this.neto = ParseInput.getValidatedNumber("Change price before tax: ", ValidNumber::ValidatePositiveDecimal);
   }
 
   public void setName(String name) {

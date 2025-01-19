@@ -5,9 +5,9 @@ public class ParseInput {
   private final static Scanner reader = new Scanner(System.in);
 
 
-  // useage:
+  // usage:
   // BigDecimal price = getValidatedInput("Enter a valid decimal number for price: ", ValidNumber::ValidateAlcoholVolume);
-  public static <T> T getValidatedInput(String prompt, Function<ValidNumber, T> validationFunction) {
+  public static <T> T getValidatedNumber(String prompt, Function<ValidNumber, T> validationFunction) {
     while (true) {
       try {
         // naudojamas funkcinis interfeisas. Paduodama klase su reikiamu metodu
@@ -24,6 +24,22 @@ public class ParseInput {
   }
 
 
+  // kaip sita suda su virsutiniu su'merge'int
+  public static <T> T getValidatedString(String prompt, Function<ValidString, T> validationFunction) {
+    while (true) {
+      try {
+        // naudojamas funkcinis interfeisas. Paduodama klase su reikiamu metodu
+        // pavyzdziai
+        // 1)ValidNumber::ValidateNatural
+        // 2)ValidNumber::ValidateAlcoholVolume
+        System.out.println(prompt);
+        ValidString number = new ValidString(reader.nextLine());
+        return validationFunction.apply(number);
+      } catch (NumberFormatException e) {
+        System.out.println("Please try again.\n");
+      }
+    }
+  }
 
 
 

@@ -2,9 +2,8 @@ import java.math.BigDecimal;
 
 // galvoju padaryti sita i interface kad butu galima skirtingus budus validation daryt
 // taip labiau reusable kodas bus bet dabar susiduriu su problemomis kad as negaliu constructoriu iskelti
-public class ValidNumber {
+public class ValidNumber implements Validatable<BigDecimal> {
   private final BigDecimal value;
-
 
   // constructors - 1) when input = Number 2) when input = String
   public ValidNumber(Number value) {
@@ -45,5 +44,10 @@ public class ValidNumber {
     } else {
       throw new NumberFormatException("invalid natural number.");
     }
+  }
+
+  @Override
+  public BigDecimal validate() {
+    return value;
   }
 }

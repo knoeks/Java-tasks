@@ -1,3 +1,7 @@
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Scanner;
+
 public class Main {
   public static void main(String[] args){
 
@@ -17,8 +21,7 @@ public class Main {
 //               └──┼►  Regular     ◄──┼──┴──┼──► Alcoholic ◄─┼──┘
 //                  │   Product        │     │    Beverage    │
 //   Medicine ◄─────┴──────────────────┘     └────────────────┴───► Wine
-    BaseAlcohol alcohol = new BaseAlcohol("trauktine");
-
+    AlcoholicBeverage alcohol = new AlcoholicBeverage();
 
   }
 }
