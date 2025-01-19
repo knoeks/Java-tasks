@@ -1,7 +1,6 @@
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
-public interface Product {
+public interface Sellable {
 
   void setBasePrice();
 
