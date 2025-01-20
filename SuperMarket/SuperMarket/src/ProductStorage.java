@@ -1,7 +1,9 @@
+import Exceptions.SoldOutException;
+
 import java.util.HashMap;
 
 public class ProductStorage {
-  private HashMap<String, Product> products;
+  private final HashMap<String, Product> products;
 
   public ProductStorage() {
     this.products = new HashMap<>();
@@ -27,7 +29,7 @@ public class ProductStorage {
     // 2) paziuret ar count != 0
     try {
       if (product.getStockQuantity() < 1) {
-        throw new SoldOutException();
+        throw new SoldOutException("Out of stock.");
       }
     } catch (SoldOutException e) {
       System.out.println("We are currently out of product. Sorry!");
