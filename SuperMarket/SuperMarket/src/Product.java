@@ -19,8 +19,12 @@ public class Product {
     return stockQuantity;
   }
 
-  public void setStockQuantity(int stockQuantity) {
-    this.stockQuantity = stockQuantity;
+  public void buyOne() {
+    stockQuantity--;
+  }
+
+  public double getPrice() {
+    return price;
   }
 
   @Override
@@ -33,5 +37,10 @@ public class Product {
   @Override
   public int hashCode() {
     return Objects.hash(name);
+  }
+
+  @Override
+  public String toString() {
+    return name.toUpperCase();
   }
 }

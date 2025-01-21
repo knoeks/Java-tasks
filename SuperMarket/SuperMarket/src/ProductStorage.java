@@ -9,42 +9,42 @@ public class ProductStorage {
     this.products = new HashMap<>();
   }
 
-  public void add(Product product){
+  public void add(Product product) {
     products.put(product.getName(), product);
   }
 
-  public String getProduct(String name) {
-
-    // 1) paziuret ar egzistuoja liste
-    try {
-      if (!products.containsKey(name)) {
-        throw new IllegalArgumentException();
-      }
-    } catch (IllegalArgumentException e) {
-      System.out.println("Error: Product not available!");
+  public boolean productExist(String name) {
+    if (!products.containsKey(name)) {
+      throw new IllegalArgumentException("Product doesnt exist.");
     }
-
-    // galima saugiai susikurt produkto kintamaji
-    Product product = products.get(name);
-    // 2) paziuret ar count != 0
-    try {
-      if (product.getStockQuantity() < 1) {
-        throw new SoldOutException("Out of stock.");
-      }
-    } catch (SoldOutException e) {
-      System.out.println("We are currently out of product. Sorry!");
-    }
-
-    // cia jau praejo visus tikrinimus
-    // todel galima "rezervuoti" preke
-    product.setStockQuantity(product.getStockQuantity() - 1);
-
-    return name;
+    return products.containsKey(name);
   }
 
-  public void returnProduct(String name) {
-    // saugu nes jau saugomas egzistuojancio kintamojo vardas
-    Product product = products.get(name);
-    product.setStockQuantity(product.getStockQuantity() + 1);
+  public boolean inStock(String name) {
+    boolean inStock = products.get(name).getStockQuantity() > 0;
+    try {
+      if (!inStock) {
+        throw new SoldOutException("Sold out!");
+      }
+    } catch (SoldOutException e) {
+      System.out.println("Product is currently out of stock!");
+    }
+    return inStock;
+  }
+
+  public Product getProduct(String name) {
+    productExist(name);
+    inStock(name);
+    return products.get(name);
+  }
+
+  public void confirmPurchase(String name) {
+    products.get(name).buyOne();
+  }
+
+  public String toString() {
+    StringBuilder str = new StringBuilder();
+    products.forEach((key, value) -> str.append(key.toUpperCase()).append(" quantity: ").append(value.getStockQuantity()).append("\n"));
+    return str.toString();
   }
 }

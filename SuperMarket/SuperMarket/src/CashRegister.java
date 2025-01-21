@@ -1,36 +1,76 @@
+import Exceptions.OutOfChangeException;
 import Exceptions.PayNotAcceptedException;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class CashRegister {
-  private final HashMap<Double, Integer> denominationCounts;
+  private final TreeMap<BigDecimal, Integer> denominationCounts;
 
   public CashRegister() {
-    denominationCounts = new HashMap<>();
+    denominationCounts = new TreeMap<>(Comparator.reverseOrder());
   }
 
 
   public void add(double denomination, int count) {
-    try {
-      if (denomination <= 0 && count <= 0) {
-        throw new IllegalArgumentException();
-      }
-      denominationCounts.put(denomination, count);
-    } catch (IllegalArgumentException e) {
-      System.out.println("cant be negative");
+    if (denomination <= 0 && count <= 0) {
+      return;
     }
+    denominationCounts.put(new BigDecimal(denomination).setScale(2, RoundingMode.HALF_UP), count);
   }
 
-  public List<Double> getDenominations() {
-    return denominationCounts.keySet().stream().sorted().toList();
+  public void add(TreeMap<BigDecimal, Integer> map) {
+    denominationCounts.putAll(map);
   }
 
-  public void PrintDenominations() {
-    System.out.println(denominationCounts.keySet().stream().map(String::valueOf).collect(Collectors.joining(", ")));
+  public List<BigDecimal> getDescDenominations() {
+    return denominationCounts.keySet().stream().toList();
+  }
+
+  public boolean coinExists(String input) {
+    if (input.matches("^([1-9]\\d*(\\.)\\d*|0?(\\.)\\d*[1-9]\\d*|[1-9]\\d*)$") && getDescDenominations().contains(new BigDecimal(input).setScale(2, RoundingMode.HALF_UP))) {
+      return true;
+    }
+    throw new PayNotAcceptedException("unknown currency");
+  }
+
+  public String PrintAscDenominations() {
+    return denominationCounts.keySet().stream().sorted().map(String::valueOf).collect(Collectors.joining(", "));
+  }
+
+  public void getChange(List<Double> coins, Double price) {
+    BigDecimal totalChange = new BigDecimal(coins.stream().mapToDouble(Double::doubleValue).sum() - price).setScale(2, RoundingMode.HALF_UP);
+    TreeMap<BigDecimal, Integer> change = new TreeMap<>();
+
+
+    //sitas sugeneruoja graza
+    for (BigDecimal denomination : getDescDenominations()) {
+      while (denomination.compareTo(totalChange) <= 0) {
+        totalChange = totalChange.subtract(denomination);
+        if (denominationCounts.get(denomination) - 1 < 0) {
+          break;
+        }
+        change.merge(denomination.setScale(2, RoundingMode.HALF_UP), 1, Integer::sum);
+      }
+    }
+
+    // jeigu cia dar lieka grazos tada vadinasi nebeliko kaip grazinti pinigu
+    if (totalChange.compareTo(BigDecimal.ZERO) > 0) {
+      throw new OutOfChangeException("Out of Change.");
+    }
+    coins.forEach(coin -> denominationCounts.merge(new BigDecimal(coin).setScale(2, RoundingMode.HALF_UP), 1, Integer::sum));
+    denominationCounts.forEach((key, value) ->
+            denominationCounts.put(key, value - change.getOrDefault(key, 0)));
+    PrintMap(change);
+  }
+
+  public void PrintMap(TreeMap<BigDecimal, Integer> map) {
+    StringBuilder str = new StringBuilder();
+    map.forEach((key, value) -> str.append("Value: ").append(key).append(", quantity: ").append(value).append("\n"));
+    System.out.println(str.toString());
   }
 
   @Override
@@ -38,50 +78,5 @@ public class CashRegister {
     StringBuilder str = new StringBuilder();
     denominationCounts.forEach((key, value) -> str.append("Value: ").append(key).append(", quantity: ").append(value).append("\n"));
     return str.toString();
-  }
-
-  public askForDenomination() {
-    HashMap<Double, Integer> paidDenominations = new HashMap<>();
-    int paidSum = 0;
-
-    if (paidDenominations.entrySet().stream().mapToDouble((entry) -> entry.getValue() * entry.getKey()) > );
-  }
-
-  // greedy first
-  public HashMap<Double, Integer> returnChange(double totalCash) {
-    HashMap<Double, Integer> changeCounts = new HashMap<>();
-
-    List<Double> denominations = getDenominations().reversed();
-
-// demonstracijai kad bandziau su streamais bet sprendimas nepanasu kad imanomas nes totalCash gali keistis
-//    denominations.forEach( item -> {
-//        while (true) {
-//          if (totalCash - denomination >= 0) {
-//            totalCash -= denomination;
-//            changeCounts.putIfAbsent(denomination, 1);
-//          } else {
-//            break;
-//          }
-//        }
-//
-//    });
-
-    for (Double denomination : denominations) {
-      while (true) {
-        if (totalCash - denomination >= 0) {
-          totalCash -= denomination;
-          changeCounts.merge(denomination, 1, Integer::sum);
-        } else {
-          break;
-        }
-      }
-    }
-
-    // cia reiktu throwint jeigu netycia neiseis grazinti sumos visos nes tarkim 0.01 lieka o mes neturim 1 cento
-    if (totalCash > 0) {
-      throw new PayNotAcceptedException("Cannot give back full change.");
-    }
-
-    return changeCounts;
   }
 }

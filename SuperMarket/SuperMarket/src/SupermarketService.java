@@ -1,24 +1,12 @@
 import java.util.List;
 
 public interface SupermarketService {
-  List<Product> getPoductList();
+  void printInitialStock();
 
-  // get name = return product if exists, else exception and "Error: Product not available"
-  Product getProduct(String name);
+  void printInitialCash();
 
-  // for printing money
-  void getTotalMoney();
+  void printUpdatedStock();
 
-  void getDenomination(double denomination);
+  void printUpdatedCash();
 
-  // if success:
-  // reduce product count-- and send message
-  Product deliverProduct();
-
-  //reduces the denomination count by subtracting greedily
-  // and prints current change quantity
-  void calculateChange();
-
-  // if cancel (on empty string)
-  void cancelTransaction();
 }
