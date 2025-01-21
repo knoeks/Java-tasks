@@ -9,12 +9,9 @@ import java.util.stream.Collectors;
 public class CashRegister {
   private final HashMap<Double, Integer> denominationCounts;
 
-
-
   public CashRegister() {
     denominationCounts = new HashMap<>();
   }
-
 
 
   public void add(double denomination, int count) {
@@ -27,8 +24,6 @@ public class CashRegister {
       System.out.println("cant be negative");
     }
   }
-
-
 
   public List<Double> getDenominations() {
     return denominationCounts.keySet().stream().sorted().toList();
@@ -43,6 +38,13 @@ public class CashRegister {
     StringBuilder str = new StringBuilder();
     denominationCounts.forEach((key, value) -> str.append("Value: ").append(key).append(", quantity: ").append(value).append("\n"));
     return str.toString();
+  }
+
+  public askForDenomination() {
+    HashMap<Double, Integer> paidDenominations = new HashMap<>();
+    int paidSum = 0;
+
+    if (paidDenominations.entrySet().stream().mapToDouble((entry) -> entry.getValue() * entry.getKey()) > );
   }
 
   // greedy first
@@ -77,7 +79,7 @@ public class CashRegister {
 
     // cia reiktu throwint jeigu netycia neiseis grazinti sumos visos nes tarkim 0.01 lieka o mes neturim 1 cento
     if (totalCash > 0) {
-      throw new PayNotAcceptedException("invalid currency value detected");
+      throw new PayNotAcceptedException("Cannot give back full change.");
     }
 
     return changeCounts;
