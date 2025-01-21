@@ -1,6 +1,7 @@
 import java.util.List;
 
 public interface SupermarketService {
+
   void printInitialStock();
 
   void printInitialCash();
@@ -9,4 +10,11 @@ public interface SupermarketService {
 
   void printUpdatedCash();
 
+  Product promptProduct();
+
+  double promptCash();
+
+  List<Double> payForProduct(Product product);
+
+  void buyProduct();
 }

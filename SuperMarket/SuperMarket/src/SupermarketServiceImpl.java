@@ -44,6 +44,7 @@ public class SupermarketServiceImpl implements SupermarketService {
     System.out.println(register);
   }
 
+  @Override
   public Product promptProduct() {
     System.out.print("What would you like to buy? Type in the name of the desired product: ");
     String str = scanner.nextLine();
@@ -55,6 +56,7 @@ public class SupermarketServiceImpl implements SupermarketService {
     return product;
   }
 
+  @Override
   public double promptCash() {
     while (true) {
       try {
@@ -71,6 +73,7 @@ public class SupermarketServiceImpl implements SupermarketService {
     }
   }
 
+  @Override
   public List<Double> payForProduct(Product product) {
     ArrayList<Double> coins = new ArrayList<>();
     System.out.println("Provide bill or coin (accepted values: " + register.PrintAscDenominations() + "): ");
@@ -86,6 +89,7 @@ public class SupermarketServiceImpl implements SupermarketService {
     return coins;
   }
 
+  @Override
   public void buyProduct() {
     try {
       Product product = promptProduct();

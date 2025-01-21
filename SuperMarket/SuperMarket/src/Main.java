@@ -28,7 +28,7 @@ public class Main {
 
 
     System.out.println("-------------------------------------------------");
-    SupermarketServiceImpl market = new SupermarketServiceImpl(storage, register);
+    SupermarketService market = new SupermarketServiceImpl(storage, register);
 
     while (true) {
       try {
