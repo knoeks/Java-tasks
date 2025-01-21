@@ -3,8 +3,8 @@ import Exceptions.CancelPurchaseException;
 public class Main {
   public static void main(String[] args) {
     CashRegister register = new CashRegister();
-    register.add(0.1, 10);
-    register.add(0.2, 20);
+    register.add(0.1, 0);
+    register.add(0.2, 0);
     register.add(0.5, 30);
     register.add(1, 10);
     register.add(2, 20);

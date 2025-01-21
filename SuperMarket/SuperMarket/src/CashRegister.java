@@ -45,14 +45,13 @@ public class CashRegister {
     BigDecimal totalChange = new BigDecimal(coins.stream().mapToDouble(Double::doubleValue).sum() - price).setScale(2, RoundingMode.HALF_UP);
     TreeMap<BigDecimal, Integer> change = new TreeMap<>();
 
-
     //sitas sugeneruoja graza
     for (BigDecimal denomination : getDescDenominations()) {
       while (denomination.compareTo(totalChange) <= 0) {
-        totalChange = totalChange.subtract(denomination);
         if (denominationCounts.get(denomination) - 1 < 0) {
           break;
         }
+        totalChange = totalChange.subtract(denomination);
         change.merge(denomination.setScale(2, RoundingMode.HALF_UP), 1, Integer::sum);
       }
     }
