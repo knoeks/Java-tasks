@@ -13,12 +13,19 @@ public class SupermarketServiceImpl implements SupermarketService {
   private final ProductStorage storage;
   private final CashRegister register;
   Scanner scanner = new Scanner(System.in);
+  private static SupermarketServiceImpl instance;
 
-  public SupermarketServiceImpl(ProductStorage storage, CashRegister register) {
+  private SupermarketServiceImpl(ProductStorage storage, CashRegister register) {
     this.storage = storage;
     this.register = register;
   }
 
+  public static synchronized SupermarketServiceImpl getInstance(ProductStorage storage, CashRegister register) {
+    if (instance == null) {
+      instance = new SupermarketServiceImpl(storage, register);
+    }
+    return instance;
+  };
 
   @Override
   public void printInitialStock() {
