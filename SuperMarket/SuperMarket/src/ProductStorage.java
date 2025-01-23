@@ -32,6 +32,8 @@ public class ProductStorage {
     return inStock;
   }
 
+
+  // pakeitimui
   public Product getProduct(String name) {
     productExist(name);
     inStock(name);

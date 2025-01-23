@@ -23,6 +23,8 @@ public class SupermarketServiceImpl implements SupermarketService {
   public static synchronized SupermarketServiceImpl getInstance(ProductStorage storage, CashRegister register) {
     if (instance == null) {
       instance = new SupermarketServiceImpl(storage, register);
+    } else {
+      //kazkoks patikrinimas
     }
     return instance;
   };
@@ -95,6 +97,7 @@ public class SupermarketServiceImpl implements SupermarketService {
     System.out.println();
     return coins;
   }
+
 
   @Override
   public void buyProduct() {
