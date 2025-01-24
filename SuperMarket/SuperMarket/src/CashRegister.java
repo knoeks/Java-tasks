@@ -60,6 +60,7 @@ public class CashRegister {
     if (totalChange.compareTo(BigDecimal.ZERO) > 0) {
       throw new OutOfChangeException("Out of Change.");
     }
+
     coins.forEach(coin -> denominationCounts.merge(new BigDecimal(coin).setScale(2, RoundingMode.HALF_UP), 1, Integer::sum));
     denominationCounts.forEach((key, value) ->
             denominationCounts.put(key, value - change.getOrDefault(key, 0)));

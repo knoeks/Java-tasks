@@ -3,11 +3,11 @@ import Exceptions.CancelPurchaseException;
 public class Main {
   public static void main(String[] args) {
     CashRegister register = new CashRegister();
-    register.add(0.1, 20);
-    register.add(0.2, 20);
+    register.add(0.1, 50);
+    register.add(0.2, 50);
     register.add(0.5, 30);
     register.add(1, 10);
-    register.add(2, 20);
+    register.add(2, 50);
 
     register.PrintAscDenominations();
 
@@ -19,8 +19,6 @@ public class Main {
     storage.add(new Product("egg", 0.5, 20));
     storage.add(new Product("book", 2.5, 30));
 
-    System.out.println(storage.productExist("bread"));
-    System.out.println(storage.inStock("bread"));
     System.out.println(storage);
     storage.confirmPurchase("bread");
 
