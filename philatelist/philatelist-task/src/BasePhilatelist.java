@@ -4,7 +4,7 @@ import lt.techin.philatelist.PostStamp;
 import java.util.*;
 
 public class BasePhilatelist implements Philatelist {
-  private ArrayList<PostStamp> postStamps;
+  private final ArrayList<PostStamp> postStamps;
 
   public BasePhilatelist() {
     postStamps = new ArrayList<>();
